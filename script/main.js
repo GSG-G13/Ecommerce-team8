@@ -6,6 +6,9 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 const container = document.querySelector('.shop-content');
+const searchBar = document.querySelector('#search-form').querySelector('input')
+
+console.log(searchBar.value);
 
 let products = JSON.parse(localStorage.getItem('products')) || [];
 
@@ -48,3 +51,25 @@ const renderProductsHome = ()=>{
 }
 
 renderProductsHome();
+
+
+
+searchBar.addEventListener('keyup', (e)=>{
+
+  const cardProduct = document.querySelectorAll('.product-card')
+  let searchTitle = e.target.value.toLowerCase();
+
+  cardProduct.forEach((card)=>{
+    let title = card.querySelector('h2').textContent;
+
+    console.log(title);
+    console.log(searchTitle);
+    if(title.toLowerCase().indexOf(searchTitle) != -1){
+      card.style.display = 'block'
+    }else{
+      card.style.display = 'none'
+    }
+  })
+
+
+})
