@@ -5,6 +5,7 @@ desc = document.getElementById('desc-input'),
 price = document.getElementById('price-input'),
 cat = document.getElementById('cat-input'),
 addButton = document.getElementById('add-button');
+const wholeProduct = document.querySelector('.whole-product-div');
 
 // let products
 // if(!localStorage.getItem('products')){
@@ -31,5 +32,34 @@ addItemForm.addEventListener('submit',(e)=>{
     addItemForm.reset();
 
 })
+
+function renderProduct(){
+     products = JSON.parse(localStorage.getItem('products')) || [];
+
+    console.log(products);
+    products.forEach(product => {
+        wholeProduct.innerHTML +=`
+        <div class="card-product">
+        <div class="img-box">
+          <img src="" alt="">
+        </div>
+        <div class="content-card">
+          <h2>${product.name}</h2>
+          <p>${product.description}</p>
+          <div class="price-catagory-show">
+            <p>${product.price}</p>
+            <p>${product.category}</p>
+          </div>
+        </div>
+        <div class="delete-edit-div">
+          <span class="delete-item"><i  class="fa-solid fa-trash"></i></span>
+          <span class="edit-item"><i class="fa-sharp fa-solid fa-pen"></i></span>
+        </div>
+      </div>
+        `
+    });
+    
+}
+renderProduct()
 
 
