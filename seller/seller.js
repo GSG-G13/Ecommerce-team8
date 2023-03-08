@@ -6,6 +6,7 @@ const editDiv = document.querySelector(".popup-edit-div");
 
 function createProduct({ url, name, desc, price, cata }) {
   const list = localStorage.getItem("products");
+  console.log(cata);
 
   if (list) {
     const data = JSON.parse(list);
@@ -21,14 +22,15 @@ function createProduct({ url, name, desc, price, cata }) {
 createProductForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
+  
   const newProduct = Object.fromEntries(formData);
-
+console.log(newProduct);
   createProduct({
     url: newProduct.imageUrl,
     name: newProduct.productTitle,
     desc: newProduct.productDescription,
     price: newProduct.formPrice,
-    cata: newProduct.formCategory,
+    cata: newProduct.cat,
   });
 
   renderProducts();
