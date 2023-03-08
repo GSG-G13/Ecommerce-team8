@@ -153,12 +153,12 @@ function renderProducts(data) {
 }
 
 function deleteOneProduct(id) {
-  const products = JSON.parse(localStorage.getItem("products"));
+  let products = JSON.parse(localStorage.getItem("products"));
   const newProducts = products.filter((product) => product.id !== id);
 
   localStorage.setItem("products", JSON.stringify(newProducts));
-
-  renderProducts();
+  products = JSON.parse(localStorage.getItem("products"));
+  renderProducts(products);
 }
 
 function editProduct(id) {
