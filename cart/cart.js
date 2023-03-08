@@ -67,6 +67,7 @@ const deleteFromCards = (arrayToDelete,id) => {
     return arrayToDelete.filter((item) => item.id != id)
 }
 
+
 function totalPrice(){
     let totalPrice = productCart.map(e=>Number(e.price)).reduce((a,b)=>a+b)
     totalPriceCart.textContent = totalPrice
@@ -81,3 +82,5 @@ function productsTotal(){
 
 
 productsTotal()
+
+module.exports =  { deleteFromCards}
