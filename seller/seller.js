@@ -10,6 +10,7 @@ if(localStorage.getItem('products')){
 function createProduct({ url, name, desc, price, cata }) {
 
   const list = localStorage.getItem("products");
+  console.log(cata);
 
   if (list) {
     const data = JSON.parse(list);
@@ -27,6 +28,7 @@ createProductForm.addEventListener("submit", (e) => {
   const formData = new FormData(e.target);
   
   const newProduct = Object.fromEntries(formData);
+console.log(newProduct);
   if(newProduct.imageUrl === ''||newProduct.productTitle === ''||newProduct.productDescription === ''||newProduct.formPrice === ''||newProduct.formCategory === ''){
     return
   }
@@ -36,7 +38,7 @@ createProductForm.addEventListener("submit", (e) => {
     name: newProduct.productTitle,
     desc: newProduct.productDescription,
     price: newProduct.formPrice,
-    cata: newProduct.formCategory,
+    cata: newProduct.cat,
   });
 
   
