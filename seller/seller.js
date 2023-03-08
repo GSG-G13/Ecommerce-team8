@@ -3,8 +3,12 @@ const wholeProductDiv = document.querySelector(".whole-product-div");
 const productNumber = document.querySelector(".product-number");
 const editDiv = document.querySelector(".popup-edit-div");
 
+if(localStorage.getItem('products')){
+  renderProducts(JSON.parse(localStorage.getItem('products'))); // console.log(newProduct);
+}
 
 function createProduct({ url, name, desc, price, cata }) {
+
   const list = localStorage.getItem("products");
   console.log(cata);
 
@@ -25,6 +29,10 @@ createProductForm.addEventListener("submit", (e) => {
   
   const newProduct = Object.fromEntries(formData);
 console.log(newProduct);
+  if(newProduct.imageUrl === ''||newProduct.productTitle === ''||newProduct.productDescription === ''||newProduct.formPrice === ''||newProduct.formCategory === ''){
+    return
+  }
+
   createProduct({
     url: newProduct.imageUrl,
     name: newProduct.productTitle,
@@ -33,14 +41,17 @@ console.log(newProduct);
     cata: newProduct.cat,
   });
 
-  renderProducts();
+  
+
+  renderProducts(JSON.parse(localStorage.getItem('products')));
 });
 
-function renderProducts() {
-  wholeProductDiv.innerHTML = "";
-  const products = JSON.parse(localStorage.getItem("products"));
+function renderProducts(data) {
 
-  products.forEach((product) => {
+  wholeProductDiv.innerHTML = "";
+
+
+  data.forEach((product) => {
     //create card-product div
     const cardProductDiv = document.createElement("div");
     cardProductDiv.classList.add("card-product");
@@ -139,18 +150,17 @@ function renderProducts() {
     wholeProductDiv.appendChild(cardProductDiv);
 
   });
-  productNumber.innerText = products.length
+  productNumber.innerText = data.length
 
 }
-renderProducts(); // console.log(newProduct);
 
 function deleteOneProduct(id) {
-  const products = JSON.parse(localStorage.getItem("products"));
+  let products = JSON.parse(localStorage.getItem("products"));
   const newProducts = products.filter((product) => product.id !== id);
 
   localStorage.setItem("products", JSON.stringify(newProducts));
-
-  renderProducts();
+  products = JSON.parse(localStorage.getItem("products"));
+  renderProducts(products);
 }
 
 function editProduct(id) {
@@ -181,4 +191,25 @@ const closeEditForm = document.querySelector('#close-edit-div');
 
 closeEditForm.addEventListener('click',()=>{
   editDiv.classList.add('hidden')
+})
+
+const searchProduct = document.querySelector('.search-product');
+
+searchProduct.addEventListener('keyup', ()=>{
+  const products = JSON.parse(localStorage.getItem('products'));
+  const newProducts = products.filter(product=> searchProduct.value === product.name);
+  console.log(newProducts);
+
+  renderProducts(newProducts)
+  // const products = document.querySelectorAll('.card-product');
+  // let searchName = e.target.value.toLowerCase();
+  // products.forEach(product=>{
+  //   let titleCard = product.querySelector('h2').textContent;
+
+  //   if(titleCard.toLowerCase().indexOf(searchName) != -1){
+  //     product.style.display = 'block'
+  //   }else{
+  //     product.style.display = 'none'
+  //   }
+  // })
 })
