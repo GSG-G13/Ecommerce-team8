@@ -1,6 +1,7 @@
 const productCart = JSON.parse(localStorage.getItem("cart"))
 
-
+const totalPriceCart = document.querySelector('.total-cart-price')
+const productNumber = document.querySelector('.product-number')
 const cards = document.querySelector(".whole-product-div")
 console.log(cards)
 
@@ -47,7 +48,7 @@ const appendCards2 = (productCart , card) => {
     const editSapn = createHTMLElement("span" ,"edit-item")
     const editIcon = createHTMLElement("i","fa-sharp fa-solid fa-pen")
     editSapn.appendChild(  editIcon)
-    btnsContainer.appendChild(  deleteSapn)
+    btnsContainer.appendChild(deleteSapn)
     btnsContainer.appendChild(editSapn)
     cardProduct.appendChild(imgBox )
     cardProduct.appendChild(contentCard)
@@ -55,6 +56,8 @@ const appendCards2 = (productCart , card) => {
     card.appendChild(cardProduct)
 
     })
+
+    totalPriceCart.innerHTML = productCart.length
 }
 appendCards2(productCart , cards)
 
@@ -66,3 +69,18 @@ const deleteFromCards = (index) => {
 
 
 }
+
+function totalPrice(){
+    let totalPrice = productCart.map(e=>Number(e.price)).reduce((a,b)=>a+b)
+    totalPriceCart.textContent = totalPrice
+    console.log(totalPrice);
+}
+totalPrice()
+
+function productsTotal(){
+    let productsTotal = productCart.length
+    productNumber.textContent = productsTotal
+}
+
+
+productsTotal()

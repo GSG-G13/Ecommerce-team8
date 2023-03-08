@@ -183,7 +183,7 @@ function editProduct(id) {
   };
 
   localStorage.setItem("products", JSON.stringify(products));
-  renderProducts();
+  renderProducts(products);
 }
 
 
