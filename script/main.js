@@ -82,18 +82,21 @@ selectPrice.addEventListener("change", (e) => {
   console.log(e.target.value);
   renderProductsHome(filterByPrice(products, e.target.value));
 });
-function filterByCategory() {
-  let filteredProducts = products.filter(
-    (e) => selectCategory.value === e.cata
+function filterByCategory(arr, str) {
+  
+  let filteredProducts = arr.filter(
+    
+    (e) => str === e.cata
   );
-  renderProductsHome(filteredProducts);
+  return filteredProducts
+ 
 }
 
-selectCategory.addEventListener("change", () => {
-  filterByCategory();
+selectCategory.addEventListener("change", (e) => {
+  console.log(e.target.value)
+  renderProductsHome(filterByCategory(products,e.target.value));
 });
 showAllBtn.addEventListener("click", () => {
   renderProductsHome(products);
 });
 
-module.exports = filterByPrice;
