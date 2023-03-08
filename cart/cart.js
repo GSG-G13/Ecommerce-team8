@@ -1,0 +1,68 @@
+const productCart = JSON.parse(localStorage.getItem("cart"))
+
+
+const cards = document.querySelector(".whole-product-div")
+console.log(cards)
+
+const createHTMLElement = (el, className, id) => {
+    const ele = document.createElement(el);
+    if(id){
+        ele.setAttribute('id', id)
+    }
+    if(className){
+        ele.setAttribute ('class',className)
+    }
+    return ele;
+  };
+
+const appendCards2 = (productCart , card) => {
+    console.log(productCart)
+    cards.innerHTML = ''
+    productCart.map((ele) => {
+    console.log(ele)
+    const cardProduct = createHTMLElement("div" , "card-product")
+    const imgBox = createHTMLElement("div" , "img-box")
+    const img = createHTMLElement("img")
+    img.setAttribute("src" , ele.url)
+    imgBox.appendChild(img)
+    const contentCard = createHTMLElement("div" , "content-card")
+    const h2 = createHTMLElement("h2")
+    h2.textContent = ele.name
+    const p = createHTMLElement("p")
+    p.textContent = ele.description
+    const priceCatagoryShow = createHTMLElement("div" , "price-catagory-show")
+    const pricePargh = createHTMLElement("p")
+    pricePargh.textContent = ele.price
+    const catagoryParph = createHTMLElement("p")
+    catagoryParph.textContent = ele.catagory
+    priceCatagoryShow.appendChild( pricePargh)
+    priceCatagoryShow.appendChild(catagoryParph)
+    contentCard.appendChild( h2)
+    contentCard.appendChild(p)
+    contentCard.appendChild(priceCatagoryShow)
+    const btnsContainer = createHTMLElement("div" ,"delete-edit-div")
+    const deleteSapn = createHTMLElement("span" ," delete-item")
+    const deleteIcon = createHTMLElement("i","fa-solid fa-trash")
+    deleteSapn.appendChild(deleteIcon)
+    const editSapn = createHTMLElement("span" ,"edit-item")
+    const editIcon = createHTMLElement("i","fa-sharp fa-solid fa-pen")
+    editSapn.appendChild(  editIcon)
+    btnsContainer.appendChild(  deleteSapn)
+    btnsContainer.appendChild(editSapn)
+    cardProduct.appendChild(imgBox )
+    cardProduct.appendChild(contentCard)
+    cardProduct.appendChild(btnsContainer)
+    card.appendChild(cardProduct)
+
+    })
+}
+appendCards2(productCart , cards)
+
+const deleteFromCards = (index) => {
+    productCart.splice(index , 1)
+    localStorage.products = JSON.stringify(productCart) ;
+    appendCards(productCart , cart)
+
+
+
+}
