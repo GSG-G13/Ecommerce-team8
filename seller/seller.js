@@ -154,9 +154,10 @@ function renderProducts(data) {
 
 }
 
+
 function deleteOneProduct(id) {
   let products = JSON.parse(localStorage.getItem("products"));
-  const newProducts = products.filter((product) => product.id !== id);
+  const newProducts = deleteItem(products, id);
 
   localStorage.setItem("products", JSON.stringify(newProducts));
   products = JSON.parse(localStorage.getItem("products"));
@@ -183,7 +184,7 @@ function editProduct(id) {
   };
 
   localStorage.setItem("products", JSON.stringify(products));
-  renderProducts();
+  renderProducts(products);
 }
 
 
@@ -213,3 +214,4 @@ searchProduct.addEventListener('keyup', ()=>{
   //   }
   // })
 })
+
