@@ -3,6 +3,9 @@ const wholeProductDiv = document.querySelector(".whole-product-div");
 const productNumber = document.querySelector(".product-number");
 const editDiv = document.querySelector(".popup-edit-div");
 
+if(localStorage.getItem('products')){
+  renderProducts(JSON.parse(localStorage.getItem('products'))); // console.log(newProduct);
+}
 
 function createProduct({ url, name, desc, price, cata }) {
 
@@ -36,16 +39,17 @@ createProductForm.addEventListener("submit", (e) => {
     cata: newProduct.formCategory,
   });
 
-  renderProducts();
+  
+
+  renderProducts(JSON.parse(localStorage.getItem('products')));
 });
 
-function renderProducts() {
+function renderProducts(data) {
 
   wholeProductDiv.innerHTML = "";
-  const products = JSON.parse(localStorage.getItem("products"));
 
 
-  products.forEach((product) => {
+  data.forEach((product) => {
     //create card-product div
     const cardProductDiv = document.createElement("div");
     cardProductDiv.classList.add("card-product");
@@ -144,10 +148,9 @@ function renderProducts() {
     wholeProductDiv.appendChild(cardProductDiv);
 
   });
-  productNumber.innerText = products.length
+  productNumber.innerText = data.length
 
 }
-renderProducts(); // console.log(newProduct);
 
 function deleteOneProduct(id) {
   const products = JSON.parse(localStorage.getItem("products"));
@@ -190,16 +193,21 @@ closeEditForm.addEventListener('click',()=>{
 
 const searchProduct = document.querySelector('.search-product');
 
-searchProduct.addEventListener('keyup', (e)=>{
-  const products = document.querySelectorAll('.card-product');
-  let searchName = e.target.value.toLowerCase();
-  products.forEach(product=>{
-    let titleCard = product.querySelector('h2').textContent;
+searchProduct.addEventListener('keyup', ()=>{
+  const products = JSON.parse(localStorage.getItem('products'));
+  const newProducts = products.filter(product=> searchProduct.value === product.name);
+  console.log(newProducts);
 
-    if(titleCard.toLowerCase().indexOf(searchName) != -1){
-      product.style.display = 'block'
-    }else{
-      product.style.display = 'none'
-    }
-  })
+  renderProducts(newProducts)
+  // const products = document.querySelectorAll('.card-product');
+  // let searchName = e.target.value.toLowerCase();
+  // products.forEach(product=>{
+  //   let titleCard = product.querySelector('h2').textContent;
+
+  //   if(titleCard.toLowerCase().indexOf(searchName) != -1){
+  //     product.style.display = 'block'
+  //   }else{
+  //     product.style.display = 'none'
+  //   }
+  // })
 })
