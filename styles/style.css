@@ -75,6 +75,14 @@ section {
 .search-bar .btn .fas {
   color: var(--bg-color);
 }
+.nav button {
+  border: none;
+  padding: 8px 15px;
+  border-radius: 30px;
+  margin-left: 1rem;
+  cursor: pointer;
+  color: var(--bg-color);
+}
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -86,7 +94,7 @@ section {
 }
 .shop-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
   gap: 1.5rem;
 }
 .product-card {
@@ -122,4 +130,28 @@ section {
 }
 .add-cart:hover {
   background-color: #8dc6ff;
+}
+footer {
+  padding: 10px;
+  background-color: var(--bg-color);
+  height: 3rem;
+}
+.select {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+section.mySwiper {
+  margin-top: 50px;
+}
+@media screen and (max-width: 600px) {
+  .search-bar:hover .input {
+    width: 100px;
+  }
+  .nav {
+    padding: 20px 10px;
+  }
+  .shop {
+    padding: 3rem;
+  }
 }
