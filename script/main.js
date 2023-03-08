@@ -77,12 +77,10 @@ const addToCart = (id) => {
   cart.push(cartItem);
   localStorage.setItem("cart", JSON.stringify(cart));
 };
-function filterByPrice() {
-  let filteredProducts = products.filter((e) => selectPrice.value === e.price);
-  renderProductsHome(filteredProducts);
-}
-selectPrice.addEventListener("change", () => {
-  filterByPrice();
+
+selectPrice.addEventListener("change", (e) => {
+  console.log(e.target.value);
+  renderProductsHome(filterByPrice(products, e.target.value));
 });
 function filterByCategory(arr, str) {
   
@@ -101,5 +99,4 @@ selectCategory.addEventListener("change", (e) => {
 showAllBtn.addEventListener("click", () => {
   renderProductsHome(products);
 });
-
 
