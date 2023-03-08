@@ -8,15 +8,16 @@ var swiper = new Swiper(".mySwiper", {
 const container = document.querySelector(".shop-content");
 const searchBar = document.querySelector("#search-form").querySelector("input");
 const totalCount = document.querySelector(".total-products-num");
+const selectPrice = document.querySelector(".filter-by-price");
 console.log(searchBar.value);
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-const renderProductsHome = () => {
+const renderProductsHome = (data) => {
   container.innerHTML = "";
   totalCount.textContent = cart.length;
-  products.forEach((product) => {
+  data.forEach((product) => {
     let card = document.createElement("div");
     card.classList.add("product-card");
 
@@ -50,7 +51,7 @@ const renderProductsHome = () => {
   });
 };
 
-renderProductsHome();
+renderProductsHome(products);
 
 searchBar.addEventListener("keyup", (e) => {
   const cardProduct = document.querySelectorAll(".product-card");
@@ -71,10 +72,13 @@ searchBar.addEventListener("keyup", (e) => {
 
 const addToCart = (id) => {
   let cartItem = products.find((product) => product.id === id);
-
   cart.push(cartItem);
-
   localStorage.setItem("cart", JSON.stringify(cart));
-
-  renderProductsHome();
 };
+function filterByPrice() {
+  let filteredProducts = products.filter((e) => selectPrice.value === e.price);
+  renderProductsHome(filteredProducts);
+}
+selectPrice.addEventListener("change", () => {
+  filterByPrice();
+});
