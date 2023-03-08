@@ -9,6 +9,7 @@ const container = document.querySelector(".shop-content");
 const searchBar = document.querySelector("#search-form").querySelector("input");
 const totalCount = document.querySelector(".total-products-num");
 const selectPrice = document.querySelector(".filter-by-price");
+const selectCategory = document.querySelector(".filter-by-category");
 console.log(searchBar.value);
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -81,4 +82,14 @@ function filterByPrice() {
 }
 selectPrice.addEventListener("change", () => {
   filterByPrice();
+});
+function filterByCategory() {
+  let filteredProducts = products.filter(
+    (e) => selectCategory.value === e.cata
+  );
+  renderProductsHome(filteredProducts);
+}
+
+selectCategory.addEventListener("change", () => {
+  filterByCategory();
 });
