@@ -276,4 +276,29 @@
   .hidden{
     display: none;
   }
-  
+  footer {
+    padding: 5rem 15rem;
+    background-color: #22313f;
+    height: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  footer div a,
+  p {
+    color: #fdfdfd;
+    font-size: 1rem;
+  }
+  .logo {
+    font-size: 1.4rem;
+    color: #fdfdfd;
+    font-weight: 400;
+  }
+  footer a {
+    text-decoration: none;
+  }
