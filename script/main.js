@@ -11,6 +11,7 @@ const searchBar = document.querySelector('#search-form').querySelector('input')
 console.log(searchBar.value);
 
 let products = JSON.parse(localStorage.getItem('products')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 
 const renderProductsHome = ()=>{
@@ -40,6 +41,11 @@ const renderProductsHome = ()=>{
 
     let i = document.createElement('i')
     i.classList.add('fa-solid', 'fa-cart-plus', 'add-cart')
+
+    i.addEventListener('click', ()=>{
+      addToCart(product.id);
+
+    })
 
     card.append(img, h2, p, span, i)
 
@@ -73,3 +79,14 @@ searchBar.addEventListener('keyup', (e)=>{
 
 
 })
+
+const addToCart = (id) => {
+
+  let cartItem  = products.find((product)=> product.id === id);
+
+  cart.push(cartItem);
+
+  localStorage.setItem('cart',JSON.stringify(cart));
+
+  renderProductsHome();
+}
