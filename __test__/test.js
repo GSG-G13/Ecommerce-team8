@@ -1,5 +1,4 @@
-const {deleteFromCards} = require("../cart/cart")
-const { deleteItem, filterByPrice,filterByCategory } = require("../seller/helper");
+const { deleteItem, filterByPrice,filterByCategory,deleteFromCards } = require("../seller/helper");
 
 describe("test delete function", () => {
   test("function must return array after delete 1 item", () => {

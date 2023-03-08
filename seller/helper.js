@@ -16,6 +16,10 @@ function filterByPrice(arr, str) {
   return filteredProducts;
 }
 
+const deleteFromCards = (arrayToDelete,id) => {
+  return arrayToDelete.filter((item) => item.id != id)
+}
 
 
-module.exports = { deleteItem, filterByPrice, filterByCategory };
+
+module.exports = { deleteItem, filterByPrice, filterByCategory, deleteFromCards };
