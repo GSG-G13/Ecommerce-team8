@@ -5,6 +5,7 @@ const editDiv = document.querySelector(".popup-edit-div");
 
 
 function createProduct({ url, name, desc, price, cata }) {
+
   const list = localStorage.getItem("products");
 
   if (list) {
@@ -21,7 +22,11 @@ function createProduct({ url, name, desc, price, cata }) {
 createProductForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
+  
   const newProduct = Object.fromEntries(formData);
+  if(newProduct.imageUrl === ''||newProduct.productTitle === ''||newProduct.productDescription === ''||newProduct.formPrice === ''||newProduct.formCategory === ''){
+    return
+  }
 
   createProduct({
     url: newProduct.imageUrl,
@@ -35,8 +40,10 @@ createProductForm.addEventListener("submit", (e) => {
 });
 
 function renderProducts() {
+
   wholeProductDiv.innerHTML = "";
   const products = JSON.parse(localStorage.getItem("products"));
+
 
   products.forEach((product) => {
     //create card-product div
@@ -179,4 +186,20 @@ const closeEditForm = document.querySelector('#close-edit-div');
 
 closeEditForm.addEventListener('click',()=>{
   editDiv.classList.add('hidden')
+})
+
+const searchProduct = document.querySelector('.search-product');
+
+searchProduct.addEventListener('keyup', (e)=>{
+  const products = document.querySelectorAll('.card-product');
+  let searchName = e.target.value.toLowerCase();
+  products.forEach(product=>{
+    let titleCard = product.querySelector('h2').textContent;
+
+    if(titleCard.toLowerCase().indexOf(searchName) != -1){
+      product.style.display = 'block'
+    }else{
+      product.style.display = 'none'
+    }
+  })
 })
