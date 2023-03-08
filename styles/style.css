@@ -78,7 +78,8 @@ section {
 .search-bar .btn .fas {
   color: var(--bg-color);
 }
-.nav button {
+.nav button,
+.select button {
   border: none;
   padding: 8px 15px;
   border-radius: 30px;

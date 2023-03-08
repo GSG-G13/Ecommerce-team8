@@ -10,6 +10,7 @@ const searchBar = document.querySelector("#search-form").querySelector("input");
 const totalCount = document.querySelector(".total-products-num");
 const selectPrice = document.querySelector(".filter-by-price");
 const selectCategory = document.querySelector(".filter-by-category");
+const showAllBtn = document.querySelector(".show-all");
 console.log(searchBar.value);
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -92,4 +93,7 @@ function filterByCategory() {
 
 selectCategory.addEventListener("change", () => {
   filterByCategory();
+});
+showAllBtn.addEventListener("click", () => {
+  renderProductsHome(products);
 });
