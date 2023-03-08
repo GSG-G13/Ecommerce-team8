@@ -1,4 +1,4 @@
-const productCart = JSON.parse(localStorage.getItem("cart"))
+let productCart = JSON.parse(localStorage.getItem("cart"))
 
 
 const cards = document.querySelector(".whole-product-div")
@@ -19,7 +19,6 @@ const appendCards2 = (productCart , card) => {
     console.log(productCart)
     cards.innerHTML = ''
     productCart.map((ele) => {
-    console.log(ele)
     const cardProduct = createHTMLElement("div" , "card-product")
     const imgBox = createHTMLElement("div" , "img-box")
     const img = createHTMLElement("img")
@@ -44,25 +43,22 @@ const appendCards2 = (productCart , card) => {
     const deleteSapn = createHTMLElement("span" ," delete-item")
     const deleteIcon = createHTMLElement("i","fa-solid fa-trash")
     deleteSapn.appendChild(deleteIcon)
-    const editSapn = createHTMLElement("span" ,"edit-item")
-    const editIcon = createHTMLElement("i","fa-sharp fa-solid fa-pen")
-    editSapn.appendChild(  editIcon)
-    btnsContainer.appendChild(  deleteSapn)
-    btnsContainer.appendChild(editSapn)
+    btnsContainer.appendChild( deleteSapn)
     cardProduct.appendChild(imgBox )
     cardProduct.appendChild(contentCard)
     cardProduct.appendChild(btnsContainer)
+    cardProduct.appendChild(deleteSapn)
     card.appendChild(cardProduct)
+    deleteSapn.addEventListener("click" ,() => {
+        let newarray = deleteFromCards(productCart, ele.id)
+        localStorage.setItem("cart" , JSON.stringify(newarray))
+        appendCards2(JSON.parse(localStorage.getItem("cart")) , cards)
+    })
 
     })
 }
 appendCards2(productCart , cards)
 
-const deleteFromCards = (index) => {
-    productCart.splice(index , 1)
-    localStorage.products = JSON.stringify(productCart) ;
-    appendCards(productCart , cart)
-
-
-
+const deleteFromCards = (arrayToDelete,id) => {
+    return arrayToDelete.filter((item) => item.id != id)
 }
