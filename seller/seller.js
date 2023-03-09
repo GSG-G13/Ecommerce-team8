@@ -30,6 +30,15 @@ createProductForm.addEventListener("submit", (e) => {
   const newProduct = Object.fromEntries(formData);
 console.log(newProduct);
   if(newProduct.imageUrl === ''||newProduct.productTitle === ''||newProduct.productDescription === ''||newProduct.formPrice === ''||newProduct.formCategory === ''){
+    const tost = document.querySelector('.toast');
+    const test = document.querySelector('.test');
+    
+    test.innerText = 'please give all value in the form !!!';
+    tost.style.display = 'block'
+setTimeout(()=>{
+  tost.style.display = 'none'
+
+},3000)
     return
   }
 
@@ -129,6 +138,12 @@ function renderProducts(data) {
         e.preventDefault();
         editProduct(product.id);
         editDiv.classList.add('hidden')
+        const cardProductStyle = document.querySelector('.card-product');
+        cardProductStyle.style.border = '2px solid green'
+        setTimeout(()=>{
+          cardProductStyle.style.border = 'none'
+
+        },2000)
       });
     });
     const editIcon = document.createElement("i");
@@ -151,6 +166,13 @@ function renderProducts(data) {
 
   });
   productNumber.innerText = data.length
+
+  if(productNumber.innerText > 0){
+    productNumber.style.backgroundColor = "green"
+  }else{
+    productNumber.style.backgroundColor = "red"
+
+  }
 
 }
 
@@ -184,7 +206,9 @@ function editProduct(id) {
   };
 
   localStorage.setItem("products", JSON.stringify(products));
+
   renderProducts(products);
+
 }
 
 

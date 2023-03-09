@@ -25,7 +25,7 @@ const renderProductsHome = (data) => {
 
     let img = document.createElement("img");
     img.classList.add("product-img");
-    img.setAttribute("src", product.url);
+    img.setAttribute("src", product.url); 
 
     let h2 = document.createElement("h2");
     h2.classList.add("product-title");
@@ -45,6 +45,9 @@ const renderProductsHome = (data) => {
     i.addEventListener("click", () => {
       addToCart(product.id);
       totalCount.textContent = cart.length;
+      if(totalCount.textContent > 1){
+        totalCount.style.color = "green"
+      }
     });
 
     card.append(img, h2, p, span, i);
