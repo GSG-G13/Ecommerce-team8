@@ -16,6 +16,7 @@ img {
 }
 body {
   color: var(--bg-color);
+  
 }
 header {
   position: fixed;
@@ -142,6 +143,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 footer div {
   display: flex;

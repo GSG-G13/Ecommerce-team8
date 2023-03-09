@@ -54,7 +54,7 @@ const appendCards2 = (productCart , card) => {
     deleteSapn.addEventListener("click" ,() => {
         let newarray = deleteFromCards(productCart, ele.id)
         localStorage.setItem("cart" , JSON.stringify(newarray))
-        appendCards2(JSON.parse(localStorage.getItem("cart")) , cards)
+        appendCards2(deleteFromCards(newarray,ele.id) , cards)
     })
 
     })

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="seller.css" />
+    <link rel="stylesheet" href="../styles/style.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -16,6 +17,21 @@
   </head>
 
   <body>
+    <header>
+      <nav class="nav container">
+        <a href="../index.html" class="logo"
+          ><i class="fa-solid fa-mobile"></i> mobileshope</a
+        >
+        
+        <div>
+          <a href="../cart/cart.html">
+            <i class="fa-solid fa-cart-shopping" id="cart-icon"></i
+            ><span class="total-products-num">0</span></a
+          >
+          
+        </div>
+      </nav>
+    </header>
     <section>
       <div class="container">
         <div class="add-product-div">
@@ -69,8 +85,7 @@
         </div>
 
         <div class="show-product-div">
-          <h2 class="my-products">All Product</h2>
-          <p class="product-number">23</p>
+          <p class="product-number"></p>
           <div class="whole-product-div">
             <!-- <div class="card-product">
             <div class="img-box">
@@ -129,6 +144,16 @@
         </div>
       </div>
     </section>
+    <footer>
+      <div>
+        <a href="../cart/cart.html">Your cart</a>
+        <a href="#">Add products</a>
+        <p>contact us : <span>+970736365262</span></p>
+      </div>
+      <a href="../index.html" class="logo"
+        ><i class="fa-solid fa-mobile"></i> mobileshope</a
+      >
+    </footer>
     <script src="./helper.js"></script>
     <script src="seller.js"></script>
   </body>
